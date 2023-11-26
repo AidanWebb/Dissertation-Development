@@ -18,7 +18,7 @@ def OKExceptionHandler(e):
 @error_handlers.app_errorhandler(HTTPException)
 def http_exception_handler(e):
     """
-    Catches HTTP Exceptions and deals with them error_handlersropriately.
+    Catches HTTP Exceptions and deals with the error_handlers appropriately.
     :param e: HTTP Exception
     :return: HTTP response describing nature of exception.
     """
