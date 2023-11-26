@@ -1,0 +1,86 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url("vecteezy_abstract-blue-background-simple-design-for-your-website_6852804.jpg");
+    background-color: #f8f8f8;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 2em;
+}
+
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #fff;
+}
+
+header p{
+    font-size: 1.2em;
+    color: #ccc;
+}
+section h2 {
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #FF8C00, #FFD700);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.8em;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out;
+}
+
+section h2:hover {
+    transform: scale(1.05);
+}
+section h2::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: -1;
+    transform: skew(-20deg);
+}
+
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+section {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 40px;
+    width: 300px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+}
+
+section:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

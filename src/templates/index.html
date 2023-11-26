@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Main Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure GPG Messaging App</title>
+
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
 </head>
+
 <body>
-<h1>Stormsend</h1>
-<h2>encrypted end-to-end</h2>
+
+    <header>
+        <h1>Secure GPG Messaging App</h1>
+        <p>Your private and encrypted communication platform</p>
+    </header>
+
+    <main>
+        <section id="login">
+            <!-- Use the <h2> element as a hyperlink to the login page -->
+            <h2 onclick="location.href='/login.html';" style="cursor:pointer;">Login</h2>
+
+        </section>
+
+
+        <section id="signup">
+            <h2 onClick="location.href='/signup.html';" style=cursor:pointer;">Sign Up</h2>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Secure GPG Messaging App. All rights reserved.</p>
+    </footer>
+
 </body>
+
 </html>
