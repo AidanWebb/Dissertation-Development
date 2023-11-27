@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure GPG Messaging App</title>
+    <title>Secure GPG Messenger</title>
 
     <!-- Link to your CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
@@ -13,20 +13,20 @@
 <body>
 
     <header>
-        <h1>Secure GPG Messaging App</h1>
+        <h1>Secure GPG Messenger</h1>
         <p>Your private and encrypted communication platform</p>
     </header>
 
     <main>
         <section id="login">
             <!-- Use the <h2> element as a hyperlink to the login page -->
-            <h2 onclick="location.href='/login.html';" style="cursor:pointer;">Login</h2>
+            <h2 onclick="location.href='{{ url_for('website.login') }}';" style="cursor:pointer;">Login</h2>
 
         </section>
 
 
         <section id="signup">
-            <h2 onClick="location.href='/signup.html';" style=cursor:pointer;">Sign Up</h2>
+            <h2 onClick="location.href='{{ url_for('website.signup') }}';" style="cursor:pointer;">Sign Up</h2>
         </section>
     </main>
 

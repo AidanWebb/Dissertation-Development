@@ -5,7 +5,28 @@ body {
     box-sizing: border-box;
     background: url("vecteezy_abstract-blue-background-simple-design-for-your-website_6852804.jpg");
     background-color: #f8f8f8;
+    transition: background 0.5s ease-in-out;
+    animation: subtleMovement 100s infinite linear;
 }
+@keyframes subtleMovement {
+    0%{
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
 
 header {
     background: rgba(0, 0, 0, 0.6);
@@ -86,4 +107,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+footer p{
+    font-size: 1.2em;
+    color: #ccc;
 }
