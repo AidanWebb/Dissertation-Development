@@ -1,0 +1,111 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url("vecteezy_abstract-blue-background-simple-design-for-your-website_6852804.jpg");
+    background-color: #f8f8f8;
+    transition: background 0.5s ease-in-out;
+    animation: subtleMovement 100s infinite linear;
+}
+
+@keyframes subtleMovement {
+    0%{
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+header {
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 2em;
+}
+
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #fff;
+}
+
+form{
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form button {
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #FF8C00, #FFD700);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.8em;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out;
+}
+
+form button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #00b300, #009900);
+}
+
+label{
+    font-size: 2em;
+    color: #000000;
+    margin-bottom: 0.5em;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+.login-button{
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 30px;
+    background: linear-gradient(to right, darkred, maroon);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2em;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out;
+    text-decoration: none;
+    margin-top: 40px;
+}
+
+.login-button:hover{
+    transform: scale(1.05);
+    background: linear-gradient(to right, #00b300, #009900);
+}
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat_page.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar for User List -->
+        <div class="sidebar">
+            <!-- User List -->
+            <div class="user-list">
+                <!-- User entries go here -->
+                <div class="user">User 1</div>
+                <div class="user">User 2</div>
+                <!-- Add more user entries as needed -->
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <!-- Placeholder or Welcome Message -->
+            <div class="welcome-message">Select a user to start chatting!</div>
+
+            <!-- Chat Logs -->
+            <div class="chat-logs">
+                <!-- Individual chat messages go here -->
+            </div>
+
+            <!-- Chat Box -->
+            <div class="chat-box">
+                <input type="text" placeholder="Type your message...">
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

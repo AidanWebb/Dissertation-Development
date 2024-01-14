@@ -2,7 +2,6 @@ import os
 import boto3
 from boto3.dynamodb.conditions import Key
 from datetime import datetime, timezone, timedelta
-
 from processing.dynamodb import encode, decode
 from classes.errors import OKException
 from classes.status import Status
@@ -15,11 +14,10 @@ dynamodb = boto3.resource('dynamodb',
 user_table = dynamodb.Table('user')
 
 
-def add_user(email, age, name):
+def add_user(email, password):
     user_info = {
         'email': email,
-        'age': age,
-        'name': name
+        'password': password
     }
     encode(user_info)
     user_table.put_item(Item=user_info)

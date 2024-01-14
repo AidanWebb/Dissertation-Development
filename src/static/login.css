@@ -8,6 +8,26 @@ body {
     transition: background 0.5s ease-in-out;
     animation: subtleMovement 100s infinite linear;
 }
+
+@keyframes subtleMovement {
+    0%{
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
 header {
     background: rgba(0, 0, 0, 0.6);
     text-align: center;
@@ -59,4 +79,13 @@ input {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 16px;
+}
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

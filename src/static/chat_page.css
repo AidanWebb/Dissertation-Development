@@ -1,0 +1,34 @@
+/* Apply your styling based on your design preferences */
+container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.user-list {
+    /* Style your user list */
+}
+
+.main-chat {
+    flex: 1;
+    padding: 20px;
+}
+
+.welcome-message {
+    /* Style your welcome message */
+}
+
+.chat-logs {
+    /* Style your chat logs */
+}
+
+.chat-box {
+    margin-top: 20px;
+}
+
+/* Add more styles as needed */

@@ -17,3 +17,8 @@ class Status(IntEnum):
 
     # Global Success Code
     SUCCESS = 0
+
+    # Database Codes
+    USER_NOT_FOUND = 1000
+    PASSWORD_CONFIRMATION_FAILED = 1001
+    INCORRECT_PASSWORD = 1002

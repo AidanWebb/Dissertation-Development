@@ -12,17 +12,20 @@
     <header>
         <h1>Login Page</h1>
     </header>
-    <form action="/login" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="username" required>
 
         <label for="password">Password:</label>
         <input type="text" id="password" name="password" required>
 
-        <button type="submit">Login</button>
+        <button type="submit" id="login">Login</button>
     </form>
-    <!-- Your login page content goes here -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/static/scripts/login.js"></script>
+    <footer>
 
+    </footer>
 </body>
 
 </html>
