@@ -1,47 +1,33 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: url("vecteezy_abstract-blue-background-simple-design-for-your-website_6852804.jpg");
+    background: url("website background.jpg");
+    background-size: cover;
     background-color: #f8f8f8;
     transition: background 0.5s ease-in-out;
     animation: subtleMovement 100s infinite linear;
 }
 
-@keyframes subtleMovement {
-    0%{
-        background-position: 0% 0%;
-    }
-    25% {
-        background-position: 100% 0%;
-    }
+/* Add Google Fonts link in your HTML file for 'Roboto' */
 
-    50% {
-        background-position: 100% 100%;
-    }
-    75% {
-        background-position: 0% 100%;
-    }
-    100% {
-        background-position: 0% 0%;
-    }
-}
+
 header {
     background: rgba(0, 0, 0, 0.6);
     text-align: center;
-    padding: 2em;
+    padding: 1.5em;
 }
-
 
 header h1 {
     font-size: 2.5em;
     margin-bottom: 0.5em;
     color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-form{
-    margin-top: 0.1em;
+form {
+    margin-top: 0.5em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,36 +37,80 @@ form button {
     text-align: center;
     cursor: pointer;
     padding: 15px 30px;
-    background: linear-gradient(to right, #FF8C00, #FFD700);
+    background: linear-gradient(to right, #0044cc, #66ccff);
     color: #fff;
     border: none;
     border-radius: 25px;
     font-size: 1.8em;
     position: relative;
     overflow: hidden;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+form button:hover {
+    transform: scale(1.1);
+    background: linear-gradient(to right, #0044cc, #66ccff);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+.login-button {
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #b30000, #ff0000);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.4em;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+    text-decoration: none;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-button:hover {
+    transform: scale(1.1);
+    background: linear-gradient(to right, #009900, #00cc00);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
 form button:hover {
     transform: scale(1.05);
     background: linear-gradient(to right, #00b300, #009900);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.2);
 }
 
-label{
-    font-size: 2em;
-    color: #000000;
+label {
+    font-size: 1.6em;
+    color: #ffffff;
     margin-bottom: 0.5em;
 }
 
 input {
-    padding: 10px;
-    margin-bottom: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 14px;
+    margin-bottom: 0.5em;
+    border: 3px solid #FFD700;
+    border-radius: 20px;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 1.4em;
+    outline: none;
+    transition: border-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: rgba(255,255,255,0.9);
+    color: #333333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
-.login-button{
+
+input:focus {
+    border-color: #FF8C00;
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.login-button {
     text-align: center;
     cursor: pointer;
     padding: 15px 30px;
@@ -88,17 +118,19 @@ input {
     color: #fff;
     border: none;
     border-radius: 25px;
-    font-size: 1.2em;
+    font-size: 1.4em;
     position: relative;
     overflow: hidden;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     text-decoration: none;
-    margin-top: 40px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.login-button:hover{
+.login-button:hover {
     transform: scale(1.05);
     background: linear-gradient(to right, #00b300, #009900);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.2);
 }
 
 footer {
@@ -108,4 +140,5 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    color: #fff;
 }
