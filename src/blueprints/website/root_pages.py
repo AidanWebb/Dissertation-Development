@@ -37,12 +37,11 @@ def auth_test(email):
 
 @website.route('/chat_page')
 @requires_auth
-def chat_page(email):
+def chat_page(user):
     """
     Returns the page for logged in users or users who have finished signing up
     """
-    return email
-    #return render_template('chat_page.html')
+    return render_template('chat_page.html', user=user)
 
 @website.route('/user/<email>', methods = ['GET'])
 def get_user_info(email):
