@@ -12,26 +12,26 @@
             <!-- User List -->
             <div class="user-list">
                 <!-- User entries go here -->
-                <div class="user">User 1</div>
-                <div class="user">User 2</div>
+                <div class="user" data-username="user1">user1</div>
+                <div class="user" data-username="user2">User 2</div>
                 <!-- Add more user entries as needed -->
             </div>
         </div>
 
         <!-- Main Chat Area -->
         <div class="main-chat">
-            <!-- Placeholder or Welcome Message -->
-            <div class="welcome-message">Select a user to start chatting!</div>
+            <div class = "chat-header">
+                <div class = "current-user">Selected User></div>
+            </div>
 
-            <!-- Chat Logs -->
-            <div class="chat-logs">
+            <div class="chat-logs" id = "chatLogs">
                 <!-- Individual chat messages go here -->
             </div>
 
             <!-- Chat Box -->
             <div class="chat-box">
-                <input type="text" placeholder="Type your message...">
-                <button>Send</button>
+                <textarea id="messageInput" placeholder="Type your message..."></textarea>
+                <button onclick="sendMessage()">Send</button>
             </div>
         </div>
     </div>

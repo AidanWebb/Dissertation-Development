@@ -14,9 +14,10 @@ dynamodb = boto3.resource('dynamodb',
 user_table = dynamodb.Table('user')
 
 
-def add_user(email, password):
+def add_user(email, password,username):
     user_info = {
         'email': email,
+        'username': username,
         'password': password
     }
     encode(user_info)

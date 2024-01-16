@@ -1,34 +1,128 @@
-/* Apply your styling based on your design preferences */
-container {
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url("vecteezy_abstract-blue-background-simple-design-for-your-website_6852804.jpg");
+    background-color: #f8f8f8;
+    transition: background 0.5s ease-in-out;
+    animation: subtleMovement 100s infinite linear;
+}
+
+@keyframes subtleMovement {
+    0% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.container {
     display: flex;
     height: 100vh;
+    overflow: hidden;
 }
 
 .sidebar {
-    width: 20%;
-    background-color: #f2f2f2;
+    width: 25%;
+    min-width: 200px;
+    background-color: #333;
+    color: white;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .user-list {
-    /* Style your user list */
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.user {
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user:hover {
+    background-color: #555;
 }
 
 .main-chat {
     flex: 1;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-.welcome-message {
-    /* Style your welcome message */
+.chat-header {
+    background-color: #444;
+    color: white;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.current-user {
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .chat-logs {
-    /* Style your chat logs */
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.message {
+    max-width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.incoming {
+    background-color: #eee;
+    align-self: flex-start;
+}
+
+.outgoing {
+    background-color: #4caf50;
+    color: white;
+    align-self: flex-end;
 }
 
 .chat-box {
-    margin-top: 20px;
+    display: flex;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #fff;
 }
 
-/* Add more styles as needed */
+textarea {
+    flex: 1;
+    padding: 10px;
+    resize: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

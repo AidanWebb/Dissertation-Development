@@ -9,7 +9,7 @@ def signup():
     data = request.get_json()
     if data['password'] != data['confirm_password']:
         raise OKException(Status.PASSWORD_CONFIRMATION_FAILED)
-    user_db.add_user(data['email'], data['password'])
+    user_db.add_user(data['email'], data['password'], data['username'])
     return jsonify(Status.dict(Status.SUCCESS))
 
 

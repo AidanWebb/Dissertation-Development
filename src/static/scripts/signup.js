@@ -15,6 +15,7 @@ $(document).ready(function () {
         // Prepare the JSON that you want to send to the API here...
         let json = {
             "email": $("#email").val(),
+            "username": $("#username").val(),
             "password": $("#password").val(),
             "confirm_password": $("#confirm_password").val()
         };
