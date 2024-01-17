@@ -51,7 +51,7 @@ form button {
 
 form button:hover {
     transform: scale(1.1);
-    background: linear-gradient(to right, #0044cc, #66ccff);
+    background: linear-gradient(to right, #00b300, #009900);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
@@ -63,7 +63,7 @@ form button:hover {
     color: #fff;
     border: none;
     border-radius: 25px;
-    font-size: 1.4em;
+    font-size: 1.8em; /* Adjusted to match the form button */
     position: relative;
     overflow: hidden;
     transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -78,11 +78,30 @@ form button:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
-form button:hover {
-    transform: scale(1.05);
-    background: linear-gradient(to right, #00b300, #009900);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+
+.back-button{
+    top: 20px;
+    left: 20px;
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #0044cc, #66ccff);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.8em;
+    position: fixed;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
 }
+.back-button:hover{
+    transform: scale(1.1);
+    background: linear-gradient(to right,#009900, #00cc00);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+}
+
 
 label {
     font-size: 1.6em;

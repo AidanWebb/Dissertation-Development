@@ -38,15 +38,17 @@ section h2 {
     font-size: 1.8em;
     position: relative;
     overflow: hidden;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
 section h2:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
     background: linear-gradient(to right, #00b300, #009900);
-
-
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
+
 section h2::before{
     content: '';
     position: absolute;
