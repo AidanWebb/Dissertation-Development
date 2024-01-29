@@ -55,6 +55,7 @@ main {
     justify-content: center;
     align-items: center;
     height: 70vh;
+    overflow-y: auto; /* or overflow: scroll; */
 }
 
 section {

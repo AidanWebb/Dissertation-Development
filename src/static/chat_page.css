@@ -101,10 +101,23 @@ textarea {
 }
 
 button {
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
+text-align: center;
     cursor: pointer;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #0044cc, #66ccff);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.8em;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+button:hover{
+    transform: scale(1.1);
+    background: linear-gradient(to right, #00b300, #009900);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }

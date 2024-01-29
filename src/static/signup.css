@@ -31,6 +31,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
 }
 
 form button {
@@ -154,7 +155,7 @@ input:focus {
 
 footer {
     text-align: center;
-    padding: 1em;
+    padding: 2em;
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     bottom: 0;
