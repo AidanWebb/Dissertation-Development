@@ -19,5 +19,5 @@ def login():
     user = user_db.get_user(data['email'])
     if user['password'] != data['password']:
         raise OKException(Status.INCORRECT_PASSWORD)
-    session['user'] = user['email']
+    session['user'] = user['username']
     return jsonify(Status.dict(Status.SUCCESS))
