@@ -9,7 +9,18 @@ body {
     transition: background 0.5s ease-in-out;
     animation: subtleMovement 100s infinite linear;
 }
+header {
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 2em;
+}
 
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #fff;
+}
 .container {
     display: flex;
     height: 100vh;
@@ -100,8 +111,8 @@ textarea {
     margin-right: 10px;
 }
 
-button {
-text-align: center;
+Button {
+    text-align: center;
     cursor: pointer;
     padding: 15px 30px;
     background: linear-gradient(to right, #0044cc, #66ccff);
@@ -116,8 +127,53 @@ text-align: center;
     margin-top: 20px;
 }
 
-button:hover{
+Button:hover{
     transform: scale(1.1);
     background: linear-gradient(to right, #00b300, #009900);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+.logout-button {
+    top: 20px;
+    left: 20px;
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #0044cc, #66ccff);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.8em;
+    position: absolute;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.logout-button:hover{
+    transform: scale(1.1);
+    background: linear-gradient(to right,#009900, #00cc00);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+}
+
+.send-button{
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #0044cc, #66ccff);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.8em;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.send-button:hover{
+    transform: scale(1.1);
+    background: linear-gradient(to right,#009900, #00cc00);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.3);
 }

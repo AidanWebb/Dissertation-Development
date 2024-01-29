@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="/static/scripts/addUser.js"></script>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Page - Secure GPG Messenger </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='chat_page.css') }}">
 </head>
 
 <body>
+    <header>
+        <h1>Welcome Back {{ user }}!</h1>
+        <button  onclick="location.href='{{ url_for('website.home') }}';" style="cursor:pointer;" class="logout-button" >Logout</button>
+        <button id="addButton">Add User</button>
+    <!-- Search bar (initially hidden) -->
+            <div id="searchBar" style="display: none;">
+                <input type="text" id="searchInput" placeholder="Search for another user...">
+                <button onclick="searchUser()">Search</button>
+            </div>
+    </header>
     <div class="container">
         <!-- Sidebar for User List -->
         <div class="sidebar">
-            <button  onclick="location.href='{{ url_for('website.home') }}';" style="cursor:pointer;">Logout</button>
             <!-- User List -->
             <div class="user-list">
-                <div class="user" data-username="user1">user1</div>
+                <div class="user" data-username="user1">User 1</div>
                 <div class="user" data-username="user2">User 2</div>
             </div>
         </div>
@@ -20,7 +34,7 @@
         <!-- Main Chat Area -->
         <div class="main-chat">
             <div class = "chat-header">
-                <div class = "current-user">{{ user }}</div>
+
             </div>
             <div class="chat-logs" id = "chatLogs">
                 <!-- Individual chat messages go here -->
@@ -29,7 +43,7 @@
             <!-- Chat Box -->
             <div class="chat-box">
                 <textarea id="messageInput" placeholder="Type your message..."></textarea>
-                <button onclick="sendMessage()">Send</button>
+                <button class="send-button" onclick="sendMessage()">Send</button>
             </div>
         </div>
     </div>

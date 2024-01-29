@@ -43,6 +43,16 @@ def chat_page(user):
     """
     return render_template('chat_page.html', user=user)
 
+@website.route('/search_user', methods=['POST'])
+@requires_auth
+def searchUser():
+    username = request.form['username']
+    user_info = user_db.get_user_by_username(username)
+    if user_info:
+        return jsonify(user_info)
+    else:
+        return jsonify({"error": "User not found"}), 404
+
 @website.route('/user/<email>', methods = ['GET'])
 def get_user_info(email):
     user_info = user_db.get_user(email)
