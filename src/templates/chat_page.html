@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="/static/scripts/addUser.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,13 +10,13 @@
 
 <body>
     <header>
-        <h1>Welcome Back {{ user }}!</h1>
+        <h1>Welcome Back {{ user.username }}!</h1>
         <button  onclick="location.href='{{ url_for('website.home') }}';" style="cursor:pointer;" class="logout-button" >Logout</button>
-        <button id="addButton">Add User</button>
+        <button id="addButton">Add Friend</button>
     <!-- Search bar (initially hidden) -->
-            <div id="searchBar" style="display: none;">
-                <input type="text" id="searchInput" placeholder="Search for another user...">
-                <button onclick="searchUser()">Search</button>
+            <div id="friendBar" style="display: none;">
+                <input type="text" id="userInput" placeholder="Insert friend's username...">
+                <button id="userAddButton">Add</button>
             </div>
     </header>
     <div class="container">
@@ -26,8 +24,9 @@
         <div class="sidebar">
             <!-- User List -->
             <div class="user-list">
-                <div class="user" data-username="user1">User 1</div>
-                <div class="user" data-username="user2">User 2</div>
+                {% for friend in user.friends %}
+                    <div class="user" data-username={{ friend }}>{{ friend }}</div>
+                {% endfor %}
             </div>
         </div>
 
@@ -48,5 +47,6 @@
         </div>
     </div>
 </body>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="/static/scripts/addFriend.js"></script>
 </html>

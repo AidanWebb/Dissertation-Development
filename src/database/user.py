@@ -14,26 +14,26 @@ dynamodb = boto3.resource('dynamodb',
 user_table = dynamodb.Table('user')
 
 
-def add_user(email, password, username):
+def add_user(username, password):
     user_info = {
-        'email': email,
         'username': username,
-        'password': password
+        'password': password,
+        'friends' : []
     }
     encode(user_info)
     user_table.put_item(Item=user_info)
     return user_info
 
 
-def get_user(email):
+def get_user(username):
     """
     Returns user object given a user ID/email.
-    :param email: User email address.
+    :param username: User email address.
     :return: user object.
     """
     try:
         response = user_table.query(
-            KeyConditionExpression=Key('email').eq(email)
+            KeyConditionExpression=Key('username').eq(username)
         )
         user = response['Items'][0]
         decode(user)
@@ -41,8 +41,22 @@ def get_user(email):
     except:
         raise OKException(Status.USER_NOT_FOUND)
 
-def get_user_by_username(username):
 
+def add_friend(username, friend):
+    try:
+        response = user_table.query(
+            KeyConditionExpression=Key('username').eq(username)
+        )
+        user = response['Items'][0]
+        decode(user)
+        user['friends'].append(friend)
+        encode(user)
+        user_table.put_item(Item=user)
+    except:
+        raise OKException(Status.USER_NOT_FOUND)
+
+
+def get_user_by_username(username):
     try:
         response = user_table.query(
             KeyConditionExpression=Key('username').eq(username)

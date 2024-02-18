@@ -14,7 +14,7 @@ $(document).ready(function () {
 
         // Prepare the JSON that you want to send to the API here...
         let json = {
-            "email": $("#email").val(),
+            "username": $("#username").val(),
             "password": $("#password").val()
         };
 
@@ -45,7 +45,7 @@ $(document).ready(function () {
 
     // Re-enables the form submission button
     function reset_submit_button() {
-        let submit_button = $('#signup');
+        let submit_button = $('#login');
         submit_button.attr('disabled', false);
         submit_button.html("Login");
     }

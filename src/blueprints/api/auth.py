@@ -9,14 +9,14 @@ def signup():
     data = request.get_json()
     if data['password'] != data['confirm_password']:
         raise OKException(Status.PASSWORD_CONFIRMATION_FAILED)
-    user_db.add_user(data['email'], data['password'], data['username'])
+    user_db.add_user(data['username'], data['password'])
     return jsonify(Status.dict(Status.SUCCESS))
 
 
 @api.route('/auth/login', methods=['POST'])
 def login():
     data = request.get_json()
-    user = user_db.get_user(data['email'])
+    user = user_db.get_user(data['username'])
     if user['password'] != data['password']:
         raise OKException(Status.INCORRECT_PASSWORD)
     session['user'] = user['username']

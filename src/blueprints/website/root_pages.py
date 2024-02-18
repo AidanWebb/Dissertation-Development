@@ -12,12 +12,14 @@ def home():
     """
     return render_template('index.html')
 
+
 @website.route('/login')
 def login():
     """
     Returns the login page for project where existing users can sign in.
     """
     return render_template('login.html')
+
 
 @website.route('/signup')
 def signup():
@@ -26,36 +28,29 @@ def signup():
     """
     return render_template('signup.html')
 
+
 @website.route('/auth-test')
 @requires_auth
-def auth_test(email):
+def auth_test(username):
     """
     Tests to see if a user is logged in
     """
-    return email
+    return username
 
 
 @website.route('/chat_page')
 @requires_auth
-def chat_page(user):
+def chat_page(username):
     """
     Returns the page for logged in users or users who have finished signing up
     """
+    user = user_db.get_user(username)
     return render_template('chat_page.html', user=user)
 
-@website.route('/search_user', methods=['POST'])
-@requires_auth
-def searchUser():
-    username = request.form['username']
-    user_info = user_db.get_user_by_username(username)
-    if user_info:
-        return jsonify(user_info)
-    else:
-        return jsonify({"error": "User not found"}), 404
 
-@website.route('/user/<email>', methods = ['GET'])
-def get_user_info(email):
-    user_info = user_db.get_user(email)
+@website.route('/user/<email>', methods=['GET'])
+def get_user_info(username):
+    user_info = user_db.get_user(username)
     if user_info:
         return jsonify(user_info)
     else:
@@ -63,9 +58,8 @@ def get_user_info(email):
 
 
 @website.route('/test/user/<email>')
-def test_user_get(email):
-
-    return jsonify(user_db.get_user(email))
+def test_user_get(username):
+    return jsonify(user_db.get_user(username))
 
 
 @website.route('/test/user', methods=['POST'])
