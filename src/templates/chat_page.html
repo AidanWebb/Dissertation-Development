@@ -10,7 +10,7 @@
 
 <body>
     <header>
-        <h1>Welcome Back {{ user.username }}!</h1>
+        <h1>Welcome back {{ user.username }}!</h1>
         <button  onclick="location.href='{{ url_for('website.home') }}';" style="cursor:pointer;" class="logout-button" >Logout</button>
         <button id="addButton">Add Friend</button>
     <!-- Search bar (initially hidden) -->
@@ -32,10 +32,10 @@
 
         <!-- Main Chat Area -->
         <div class="main-chat">
-            <div class = "chat-header">
-
+            <div class="chat-header" id="headerText"> <!-- Add id="headerText" -->
+                Chat Header <!-- Initial content of the chat header -->
             </div>
-            <div class="chat-logs" id = "chatLogs">
+            <div class="chat-logs" id="chatLogs">
                 <!-- Individual chat messages go here -->
             </div>
 
@@ -49,4 +49,10 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="/static/scripts/addFriend.js"></script>
+<script>
+    $('.user').click(function() {
+        var username = $(this).attr('data-username');
+        $('#headerText').text("Chatting with " + username);
+    });
+</script>
 </html>

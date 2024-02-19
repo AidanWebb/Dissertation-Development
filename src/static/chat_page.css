@@ -30,11 +30,13 @@ header h1 {
 .sidebar {
     width: 25%;
     min-width: 200px;
-    background-color: #333;
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     padding: 20px;
     box-sizing: border-box;
+    overflow-y: auto;
 }
+
 
 .user-list {
     overflow-y: auto;
@@ -43,9 +45,14 @@ header h1 {
 
 .user {
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    background-color: black;
+    color: #66ccff;
+    font-weight: bold;
+    border: 1px solid #ccc;
 }
 
 .user:hover {
@@ -59,10 +66,15 @@ header h1 {
 }
 
 .chat-header {
-    background-color: #444;
-    color: white;
-    padding: 15px;
-    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.6);
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    text-align: left; /* Center alignment */
+    font-size: 1.5em; /* Larger font size */
+    font-weight: lighter;
+    text-transform: full-size-kana;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .current-user {
@@ -99,7 +111,7 @@ header h1 {
     display: flex;
     padding: 15px;
     box-sizing: border-box;
-    background-color: #fff;
+
 }
 
 textarea {
@@ -176,4 +188,8 @@ Button:hover{
     transform: scale(1.1);
     background: linear-gradient(to right,#009900, #00cc00);
     box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+}
+
+.main-chat{
+    font-family: 'Arial', sans-serif;
 }
