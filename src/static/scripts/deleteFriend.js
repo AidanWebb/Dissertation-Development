@@ -17,6 +17,8 @@ $(document).ready(function() {
                 if (data.status === 0) {
                     // Remove friend from the UI
                     $(`div.user[data-username='${username}']`).remove();
+
+                    $('#headerText').text("Click a friend to start chatting");
                 } else {
                     // Handle failure
                     console.log("Failed to delete friend:", data.message);
