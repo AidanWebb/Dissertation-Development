@@ -11,3 +11,9 @@ def add_friend(username):
     user_db.add_friend(username, data['username'])
     return jsonify(Status.dict(Status.SUCCESS))
 
+@api.route('/delete-friend', methods=['POST'])
+@requires_auth
+def delete_friend(username):
+    data = request.get_json()
+    user_db.delete_friend(username, data['username'])
+    return jsonify(Status.dict(Status.SUCCESS))

@@ -44,20 +44,22 @@ header h1 {
 }
 
 .user {
-    padding: 10px;
-    margin-bottom: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
-    border-radius: 5px;
-    background-color: black;
-    color: #66ccff;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff; /* White text color */
     font-weight: bold;
-    border: 1px solid #ccc;
+    text-align: center; /* Center text alignment */
+    font-size: 1.1em; /* Font size */
 }
 
 .user:hover {
-    background-color: #555;
+    background: linear-gradient(to right, #0044cc, #66ccff); /* Darker background color on hover */
 }
+
 
 .main-chat {
     flex: 1;
@@ -184,6 +186,24 @@ Button:hover{
     margin-top: 20px;
 }
 
+.delete-button {
+    cursor: pointer;
+    padding: 8px 15px; /* Adjust padding to make the button smaller */
+    background: linear-gradient(to right, #cc0000, #ff6666); /* Red gradient background */
+    color: #fff; /* White text color */
+    border: none;
+    border-radius: 15px; /* Rounded border */
+    font-size: 1em; /* Font size */
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 5px; /* Adjust margin */
+}
+
+.delete-button:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+    background: linear-gradient(to right, #990000, #cc3333); /* Darker red gradient background on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
 .send-button:hover{
     transform: scale(1.1);
     background: linear-gradient(to right,#009900, #00cc00);

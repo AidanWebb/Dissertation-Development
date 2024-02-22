@@ -25,7 +25,9 @@
             <!-- User List -->
             <div class="user-list">
                 {% for friend in user.friends %}
-                    <div class="user" data-username={{ friend }}>{{ friend }}</div>
+                    <div class="user" data-username={{ friend }}>{{ friend }}
+                    <button class="delete-button">Delete</button>
+                    </div>
                 {% endfor %}
             </div>
         </div>
@@ -33,7 +35,7 @@
         <!-- Main Chat Area -->
         <div class="main-chat">
             <div class="chat-header" id="headerText"> <!-- Add id="headerText" -->
-                Chat Header <!-- Initial content of the chat header -->
+                Click a friend to start chatting <!-- Initial content of the chat header -->
             </div>
             <div class="chat-logs" id="chatLogs">
                 <!-- Individual chat messages go here -->
@@ -49,6 +51,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="/static/scripts/addFriend.js"></script>
+<script src="/static/scripts/deleteFriend.js"></script>
 <script>
     $('.user').click(function() {
         var username = $(this).attr('data-username');

@@ -56,6 +56,24 @@ def add_friend(username, friend):
         raise OKException(Status.USER_NOT_FOUND)
 
 
+def delete_friend(username, friend):
+    try:
+        response = user_table.query(
+            KeyConditionExpression=Key('username').eq(username)
+        )
+        user = response['Items'][0]
+        decode(user)
+
+        if friend in user['friends']:
+            user['friends'].remove(friend)
+            encode(user)
+            user_table.put_item(Item=user)
+        else:
+            raise OKException(Status.USER_NOT_FOUND)
+    except Exception as e:
+        print(f"Error deleting friend: {e}")
+        raise OKException(Status.USER_NOT_FOUND)
+
 def get_user_by_username(username):
     try:
         response = user_table.query(
