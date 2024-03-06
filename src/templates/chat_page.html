@@ -21,6 +21,7 @@
     </header>
     <div class="container">
         <!-- Sidebar for User List -->
+        <input id="sender" hidden value="{{ user.username }}">
         <div class="sidebar">
             <!-- User List -->
             <div class="user-list">
@@ -44,7 +45,7 @@
             <!-- Chat Box -->
             <div class="chat-box">
                 <label for="messageInput"></label><textarea id="messageInput" placeholder="Type your message..."></textarea>
-                <button id="send-button" class="send-button" onclick="sendMessage()">Send</button>
+                <button id="send-button" class="send-button">Send</button>
             </div>
         </div>
     </div>
