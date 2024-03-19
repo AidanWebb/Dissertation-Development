@@ -1,10 +1,16 @@
 import os
 import boto3
+import logging
 from boto3.dynamodb.conditions import Key
 from datetime import datetime, timezone, timedelta
 from processing.dynamodb import encode, decode
 from classes.errors import OKException
 from classes.status import Status
+from processing.crypto import rsa_keypair
+import logging
+
+# At the beginning of your file
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 dynamodb = boto3.resource('dynamodb',
                           aws_access_key_id=os.environ.get("AWS_ACCESS_ID"),
@@ -15,10 +21,15 @@ user_table = dynamodb.Table('user')
 
 
 def add_user(username, password):
+    # Generate RSA key pair and retrieve serialized keys
+    private_key_serialized, public_key_serialized = rsa_keypair()
+
     user_info = {
         'username': username,
         'password': password,
-        'friends' : []
+        'public_key': public_key_serialized.decode('utf-8'),
+        # Assuming the serialized key is in bytes and needs decoding
+        'friends': []
     }
     encode(user_info)
     user_table.put_item(Item=user_info)
@@ -42,19 +53,48 @@ def get_user(username):
         raise OKException(Status.USER_NOT_FOUND)
 
 
-def add_friend(username, friend):
-    try:
-        response = user_table.query(
-            KeyConditionExpression=Key('username').eq(username)
-        )
-        user = response['Items'][0]
-        decode(user)
-        user['friends'].append(friend)
+def add_friend(username, friend_username):
+    # Fetch both user and friend from the database
+    user = get_user(username)
+    friend = get_user(friend_username)
+
+    # Check if friend already in user's friend list
+    if friend_username not in user['friends']:
+        # Add friend to user's friend list
+        user['friends'].append(friend_username)
+        # Update the user in the database
         encode(user)
         user_table.put_item(Item=user)
-    except:
-        raise OKException(Status.USER_NOT_FOUND)
 
+    # Check if user already in friend's friend list
+    if username not in friend['friends']:
+        # Add user to friend's friend list
+        friend['friends'].append(username)
+        # Update the friend in the database
+        encode(friend)
+        user_table.put_item(Item=friend)
+
+
+def fetch_public_key(username):
+    """
+    Fetches the public key for a given username from the DynamoDB table.
+    """
+    try:
+        logging.info(f"Attempting to fetch public key for username: {username}")
+        response = user_table.query(
+            KeyConditionExpression=Key('username').eq(username),
+            ProjectionExpression='public_key'  # Fetch only the public_key attribute
+        )
+        if response['Items']:
+            public_key = response['Items'][0]['public_key']
+            logging.info(f"Successfully fetched public key for {username}")
+            return public_key
+        else:
+            logging.warning(f"No public key found for {username}")
+            return None  # Return None if no user or public key is found
+    except Exception as e:
+        logging.error(f"Error fetching public key for {username}: {e}", exc_info=True)
+        return None
 
 def delete_friend(username, friend):
     try:
@@ -84,3 +124,13 @@ def get_user_by_username(username):
         return user
     except:
         raise OKException(Status.USER_NOT_FOUND)
+
+def get_public_key(username):
+    try:
+        user = fetch_public_key(username)
+        print(f"User object retrieved for '{username}': {user}")  # Log the user object for debugging
+        return user.get('public_key')
+    except Exception as e:
+        print(f"Error retrieving public key for {username}: {e}")
+        return None
+
