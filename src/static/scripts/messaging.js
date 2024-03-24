@@ -9,9 +9,9 @@ $(document).ready(function () {
 
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
-    // Function to append messages to chat logs
-    function appendMessage(username, message) {
-        var messageElement = $('<div>').addClass('message').text(`${username}: ${message}`);
+    // Updated function to append messages to chat logs with message type
+    function appendMessage(username, message, type) {
+        var messageElement = $('<div>').addClass('message').addClass(type).text(`${username}: ${message}`);
         chatLogs.append(messageElement);
         chatLogs.scrollTop(chatLogs.prop('scrollHeight'));
     }
@@ -21,11 +21,6 @@ $(document).ready(function () {
         receiver = $(this).data('username');
         $('#headerText').text("Chatting with " + receiver);
         socket.emit('join_conversation', {'room': [sender, receiver].sort().join('_')});
-
-        // Load chat history for the selected user
-        // This is a pseudo-code function, replace it with your actual implementation
-        //loadChatHistory(receiver, function (history) {
-            //history.forEach(function (messageData) {
     });
 
     $('#send-button').click(function () {
@@ -45,8 +40,8 @@ $(document).ready(function () {
             'room': [sender, receiver].sort().join('_')
         });
 
-        // Optimistically append the message to the chat log
-        appendMessage(sender, message);
+        // Optimistically append the sent message to the chat log with 'sent' type
+        appendMessage(sender, message, 'sent');
         $('#messageInput').val('');
     });
 
@@ -54,7 +49,8 @@ $(document).ready(function () {
         try {
             var encryptedMessageBytes = forge.util.decode64(data.message);
             var decryptedMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessageBytes, 'RSA-OAEP'));
-            appendMessage(data.sender, decryptedMessage);
+            // Append the received message to the chat log with 'received' type
+            appendMessage(data.sender, decryptedMessage, 'received');
         } catch (error) {
             console.error('Decryption error:', error);
         }

@@ -215,3 +215,32 @@ Button:hover{
 .main-chat{
     font-family: 'Arial', sans-serif;
 }
+
+.message.sent {
+    background-color: #1358cf; /* Electric blue for sent messages */
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    max-width: 80%;
+    word-wrap: break-word;
+    align-self: flex-end; /* Aligns sent messages to the right */
+}
+
+.message.received {
+    background-color: #805ead; /* Subtle magenta/purple for received messages */
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    max-width: 80%;
+    word-wrap: break-word;
+    align-self: flex-start; /* Aligns received messages to the left */
+}
+
+/* Ensure the chat-logs container is a flexbox to use align-self */
+#chatLogs {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
