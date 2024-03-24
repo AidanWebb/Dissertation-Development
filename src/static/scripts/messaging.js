@@ -56,6 +56,27 @@ $(document).ready(function () {
         }
     });
 
+    socket.on('chat_history', function (data) {
+        console.log(data);
+        data.history.forEach(function (historyItem) {
+            try {
+
+                var encryptedMessageBytes = forge.util.decode64(historyItem.message); // Use 'message' property
+                var decryptedMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessageBytes, 'RSA-OAEP'));
+
+                // Determine the message type (sent or received) based on the sender
+                var messageType = historyItem.sender === sender ? 'sent' : 'received';
+
+                // Append the decrypted message to the chat log
+                appendMessage(historyItem.sender, decryptedMessage, messageType);
+            } catch (error) {
+                console.error('Decryption error in chat history:', error);
+                // Optionally, handle the decryption error (e.g., display a placeholder message)
+            }
+        });
+    });
+
+
     socket.on('connect', function () {
         console.log('Connected to WebSocket server');
     });
