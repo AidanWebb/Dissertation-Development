@@ -42,10 +42,29 @@ def auth_test(username):
 @requires_auth
 def chat_page(username):
     """
-    Returns the page for logged in users or users who have finished signing up
+    Returns the chat page for the logged-in user.
     """
     user = user_db.get_user(username)
-    return render_template('chat_page.html', user=user)
+    if not user:
+        return "User not found", 404
+
+    private_key = user_db.fetch_private_key(username)
+
+    # Explicitly decode the private_key if it's a bytes object
+    if isinstance(private_key, bytes):
+        private_key = private_key.decode('utf-8')
+
+    # Now private_key should be a string, safe to print
+    print(private_key)
+
+    contacts_public_keys = {}
+    for friend_username in user.get('friends', []):
+        public_key = user_db.fetch_public_key(friend_username)
+        if public_key:
+            contacts_public_keys[friend_username] = public_key
+
+    return render_template('chat_page.html', user=user, private_key=private_key,
+                           contacts_public_keys=contacts_public_keys)
 
 
 @website.route('/user/<email>', methods=['GET'])

@@ -1,51 +1,66 @@
 $(document).ready(function () {
-    var chatLogs = $('#chatLogs'); // Cache the selector
-
+    var chatLogs = $('#chatLogs');
     var sender = $('#sender').val();
     var receiver = null;
 
-    // Establish WebSocket connection globally
+    // Retrieve the user's private key from the hidden input field
+    var privateKeyPem = $('#userPrivateKey').val();
+    var privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
+
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+
+    // Function to append messages to chat logs
+    function appendMessage(username, message) {
+        var messageElement = $('<div>').addClass('message').text(`${username}: ${message}`);
+        chatLogs.append(messageElement);
+        chatLogs.scrollTop(chatLogs.prop('scrollHeight'));
+    }
 
     $('.user').click(function () {
         $('#chatLogs').empty();
-        var clickedUsername = $(this).attr('data-username');
-        $('#headerText').text("Chatting with " + clickedUsername);
-        receiver = clickedUsername;
-        var parties = [sender, receiver].sort();
-        let room = parties.join('_');
-        socket.emit('join_conversation', {'room': room});
+        receiver = $(this).data('username');
+        $('#headerText').text("Chatting with " + receiver);
+        socket.emit('join_conversation', {'room': [sender, receiver].sort().join('_')});
+
+        // Load chat history for the selected user
+        // This is a pseudo-code function, replace it with your actual implementation
+        //loadChatHistory(receiver, function (history) {
+            //history.forEach(function (messageData) {
     });
 
     $('#send-button').click(function () {
-        var messageInput = $('#messageInput');
-        var message = messageInput.val();
-        var parties = [sender, receiver].sort();
-        let room = parties.join('_');
+        var message = $('#messageInput').val();
+        if (!receiver) {
+            alert("Select a user to chat with.");
+            return;
+        }
+        var publicKeyPem = $(`.contactPublicKey[data-username="${receiver}"]`).val();
+        var publicKey = forge.pki.publicKeyFromPem(publicKeyPem);
 
-        socket.emit('send_message', {'sender': sender, 'message': message, 'receiver': receiver, 'room': room});
-        messageInput.val(''); // Clear the input after sending
-    });
-
-
-    socket.on('chat_history', function (data) {
-        console.log(data);
-        data.history.forEach(function (message) {
-            var messageElement = $('<div>').addClass('message').text(`${message.sender}: ${message.message}`);  // Adjusted to use 'message' instead of 'content'
-            chatLogs.append(messageElement);
+        var encryptedMessage = forge.util.encode64(publicKey.encrypt(forge.util.encodeUtf8(message), 'RSA-OAEP'));
+        socket.emit('send_message', {
+            'sender': sender,
+            'message': encryptedMessage,
+            'receiver': receiver,
+            'room': [sender, receiver].sort().join('_')
         });
-        chatLogs.scrollTop(chatLogs.prop('scrollHeight'));
-    });
 
+        // Optimistically append the message to the chat log
+        appendMessage(sender, message);
+        $('#messageInput').val('');
+    });
 
     socket.on('receive_message', function (data) {
-        var messageElement = $('<div>').addClass('message').text(`${data.sender}: ${data.message}`);
-        chatLogs.append(messageElement); // Use the cached selector
-        chatLogs.scrollTop(chatLogs.prop('scrollHeight')); // Scroll to the bottom
+        try {
+            var encryptedMessageBytes = forge.util.decode64(data.message);
+            var decryptedMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessageBytes, 'RSA-OAEP'));
+            appendMessage(data.sender, decryptedMessage);
+        } catch (error) {
+            console.error('Decryption error:', error);
+        }
     });
 
-    // Handle connection event
     socket.on('connect', function () {
-        console.log('Connected to the WebSocket server');
+        console.log('Connected to WebSocket server');
     });
 });

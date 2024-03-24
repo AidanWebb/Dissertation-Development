@@ -9,6 +9,7 @@ from blueprints.website import website
 from processing import filters
 from database.chatRooms import sendMessage, receiveMessages
 
+
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_SECRET_KEY']
@@ -39,12 +40,12 @@ def handle_disconnect():
 
 @socketio.on('join_conversation')
 def on_join(data):
-    print("called")
     room = data['room']
     join_room(room)
 
     chat_history = receiveMessages(room)
     socketio.emit('chat_history', {'history': chat_history}, room=room)
+
 
 
 @socketio.on('leave_conversation')

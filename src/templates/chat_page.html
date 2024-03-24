@@ -3,56 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Page - Secure GPG Messenger </title>
+    <title>Chat Page - Secure GPG Messenger</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='chat_page.css') }}">
 </head>
 
 <body>
-    <header>
-        <h1>Welcome back {{ user.username }}</h1>
-        <button  onclick="location.href='{{ url_for('website.home') }}';" style="cursor:pointer;" class="logout-button" >Logout</button>
-        <button id="addButton">Add Friend</button>
-    <!-- Search bar (initially hidden) -->
-            <div id="friendBar" style="display: none;">
-                <input type="text" id="userInput" placeholder="Insert friend's username...">
-                <button id="userAddButton">Add</button>
-            </div>
-    </header>
-    <div class="container">
-        <!-- Sidebar for User List -->
-        <input id="sender" hidden value="{{ user.username }}">
-        <div class="sidebar">
-            <!-- User List -->
-            <div class="user-list">
-                {% for friend in user.friends %}
-                    <div class="user" data-username={{ friend }}>{{ friend }}
+<header>
+    <h1>Welcome back {{ user['username'] }}</h1> <!-- Updated to access dictionary value -->
+    <button onclick="location.href='{{ url_for('website.home') }}';" style="cursor:pointer;" class="logout-button">
+        Logout
+    </button>
+    <button id="addButton">Add Friend</button>
+    <div id="friendBar" style="display: none;">
+        <input type="text" id="userInput" placeholder="Insert friend's username...">
+        <button id="userAddButton">Add</button>
+    </div>
+</header>
+<div class="container">
+    <input id="sender" hidden value="{{ user['username'] }}"> <!-- Updated to access dictionary value -->
+
+    <!-- Dynamically inserted user's private key from the server -->
+    <!-- Dynamically inserted user's private key from the server -->
+    <input id="userPrivateKey" type="hidden"
+           value="{{ private_key }}">
+
+    <div class="sidebar">
+        <div class="user-list">
+            {% for friend_username, public_key in contacts_public_keys.items() %}
+                <!-- Updated loop to iterate over contacts_public_keys -->
+                <div class="user" data-username="{{ friend_username }}">
+                    {{ friend_username }}
                     <button class="delete-button">Delete</button>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Main Chat Area -->
-        <div class="main-chat">
-            <div class="chat-header" id="headerText"> <!-- Add id="headerText" -->
-                Click a friend to start chatting <!-- Initial content of the chat header -->
-            </div>
-            <div class="chat-logs" id="chatLogs">
-                <!-- Individual chat messages go here -->
-            </div>
-
-            <!-- Chat Box -->
-            <div class="chat-box">
-                <label for="messageInput"></label><textarea id="messageInput" placeholder="Type your message..."></textarea>
-                <button id="send-button" class="send-button">Send</button>
-            </div>
+                    <!-- Dynamically inserted friend's public key from the server -->
+                    <input type="hidden" class="contactPublicKey" data-username="{{ friend_username }}"
+                           value="{{ public_key }}">
+                </div>
+            {% endfor %}
         </div>
     </div>
-</body>
+
+    <div class="main-chat">
+        <div class="chat-header" id="headerText">
+            Click a friend to start chatting
+        </div>
+        <div class="chat-logs" id="chatLogs"></div>
+        <div class="chat-box">
+            <textarea id="messageInput" placeholder="Type your message..."></textarea>
+            <button id="send-button" class="send-button">Send</button>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.min.js"></script>
 <script src="/static/scripts/addFriend.js"></script>
 <script src="/static/scripts/deleteFriend.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/forge/0.10.0/forge.min.js"></script>
 <script src="/static/scripts/messaging.js"></script>
+</body>
 </html>

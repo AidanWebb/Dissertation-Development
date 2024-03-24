@@ -1,25 +1,20 @@
 $(document).ready(function () {
-
-    // Submit the form when submit button is pressed
     $("#signupForm").submit(function (event) {
         event.preventDefault();
         submitForm();
     });
 
     function submitForm() {
-        // Disable the submit button to ensure groups are not duplicated
         let submitButton = $('#signup');
         submitButton.attr('disabled', true);
         submitButton.html("Signing Up...");
 
-        // Prepare the JSON that you want to send to the API here...
         let json = {
             "username": $("#username").val(),
             "password": $("#password").val(),
             "confirm_password": $("#confirm_password").val()
         };
 
-        // Post the JSON
         $.ajax("/api/auth/signup", {
             type: "POST",
             data: JSON.stringify(json),
@@ -44,7 +39,6 @@ $(document).ready(function () {
         reset_submit_button();
     }
 
-    // Re-enables the form submission button
     function reset_submit_button() {
         let submit_button = $('#signup');
         submit_button.attr('disabled', false);

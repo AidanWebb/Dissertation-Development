@@ -1,5 +1,6 @@
 import os
 import boto3
+import base64
 import logging
 from boto3.dynamodb.conditions import Key
 from datetime import datetime, timezone, timedelta
@@ -28,7 +29,7 @@ def add_user(username, password):
         'username': username,
         'password': password,
         'public_key': public_key_serialized.decode('utf-8'),
-        # Assuming the serialized key is in bytes and needs decoding
+        'private_key': private_key_serialized.decode('utf-8'),
         'friends': []
     }
     encode(user_info)
@@ -83,7 +84,7 @@ def fetch_public_key(username):
         logging.info(f"Attempting to fetch public key for username: {username}")
         response = user_table.query(
             KeyConditionExpression=Key('username').eq(username),
-            ProjectionExpression='public_key'  # Fetch only the public_key attribute
+            ProjectionExpression='public_key'
         )
         if response['Items']:
             public_key = response['Items'][0]['public_key']
@@ -94,6 +95,28 @@ def fetch_public_key(username):
             return None  # Return None if no user or public key is found
     except Exception as e:
         logging.error(f"Error fetching public key for {username}: {e}", exc_info=True)
+        return None
+
+
+def fetch_private_key(username):
+    """
+    Fetches the public key for a given username from the DynamoDB table.
+    """
+    try:
+        logging.info(f"Attempting to fetch private key for username: {username}")
+        response = user_table.query(
+            KeyConditionExpression=Key('username').eq(username),
+            ProjectionExpression='private_key'
+        )
+        if response['Items']:
+            private_key = response['Items'][0]['private_key']
+            logging.info(f"Successfully fetched private key for {username}")
+            return private_key
+        else:
+            logging.warning(f"No private key found for {username}")
+            return None  # Return None if no user or public key is found
+    except Exception as e:
+        logging.error(f"Error fetching private key for {username}: {e}", exc_info=True)
         return None
 
 def delete_friend(username, friend):
@@ -114,6 +137,7 @@ def delete_friend(username, friend):
         print(f"Error deleting friend: {e}")
         raise OKException(Status.USER_NOT_FOUND)
 
+
 def get_user_by_username(username):
     try:
         response = user_table.query(
@@ -125,12 +149,12 @@ def get_user_by_username(username):
     except:
         raise OKException(Status.USER_NOT_FOUND)
 
+
 def get_public_key(username):
     try:
         user = fetch_public_key(username)
-        print(f"User object retrieved for '{username}': {user}")  # Log the user object for debugging
+        print(f"User object retrieved for '{username}': {user}")
         return user.get('public_key')
     except Exception as e:
         print(f"Error retrieving public key for {username}: {e}")
         return None
-
