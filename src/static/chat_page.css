@@ -9,6 +9,7 @@ body {
     transition: background 0.5s ease-in-out;
     animation: subtleMovement 100s infinite linear;
 }
+
 header {
     background: rgba(0, 0, 0, 0.6);
     text-align: center;
@@ -21,6 +22,7 @@ header h1 {
     margin-bottom: 0.5em;
     color: #fff;
 }
+
 .container {
     display: flex;
     height: 100vh;
@@ -142,7 +144,7 @@ Button {
     margin-top: 20px;
 }
 
-Button:hover{
+Button:hover {
     transform: scale(1.1);
     background: linear-gradient(to right, #00b300, #009900);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
@@ -165,13 +167,13 @@ Button:hover{
     text-decoration: none;
 }
 
-.logout-button:hover{
+.logout-button:hover {
     transform: scale(1.1);
-    background: linear-gradient(to right,#009900, #00cc00);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+    background: linear-gradient(to right, #009900, #00cc00);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
-.send-button{
+.send-button {
     text-align: center;
     cursor: pointer;
     padding: 15px 30px;
@@ -206,39 +208,40 @@ Button:hover{
     background: linear-gradient(to right, #990000, #cc3333); /* Darker red gradient background on hover */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
-.send-button:hover{
+
+.send-button:hover {
     transform: scale(1.1);
-    background: linear-gradient(to right,#009900, #00cc00);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+    background: linear-gradient(to right, #009900, #00cc00);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
-.main-chat{
+.main-chat {
     font-family: 'Arial', sans-serif;
 }
 
+
 .message.sent {
-    background-color: #1358cf; /* Electric blue for sent messages */
+    background-color: #1358cf;
     color: white;
     padding: 10px;
     border-radius: 10px;
     margin: 10px 0;
     max-width: 80%;
     word-wrap: break-word;
-    align-self: flex-end; /* Aligns sent messages to the right */
+    align-self: flex-end;
 }
 
 .message.received {
-    background-color: #805ead; /* Subtle magenta/purple for received messages */
+    background-color: #805ead;
     color: white;
     padding: 10px;
     border-radius: 10px;
     margin: 10px 0;
     max-width: 80%;
     word-wrap: break-word;
-    align-self: flex-start; /* Aligns received messages to the left */
+    align-self: flex-start;
 }
 
-/* Ensure the chat-logs container is a flexbox to use align-self */
 #chatLogs {
     display: flex;
     flex-direction: column;
