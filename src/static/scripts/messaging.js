@@ -3,17 +3,21 @@ $(document).ready(function () {
     var sender = $('#sender').val();
     var receiver = null;
 
-    // Retrieve the user's private key from the hidden input field
     var privateKeyPem = $('#userPrivateKey').val();
     var privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
 
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
-    // Updated function to append messages to chat logs with message type
     function appendMessage(username, message, type) {
-        var messageElement = $('<div>').addClass('message').addClass(type).text(`${username}: ${message}`);
-        chatLogs.append(messageElement);
-        chatLogs.scrollTop(chatLogs.prop('scrollHeight'));
+        var existingMessages = $('.message').filter(function () {
+            return $(this).text() === `${username}: ${message}` && $(this).hasClass(type);
+        });
+
+        if (existingMessages.length === 0) {
+            var messageElement = $('<div>').addClass('message').addClass(type).text(`${username}: ${message}`);
+            chatLogs.append(messageElement);
+            chatLogs.scrollTop(chatLogs.prop('scrollHeight'));
+        }
     }
 
     $('.user').click(function () {
@@ -29,18 +33,22 @@ $(document).ready(function () {
             alert("Select a user to chat with.");
             return;
         }
-        var publicKeyPem = $(`.contactPublicKey[data-username="${receiver}"]`).val();
-        var publicKey = forge.pki.publicKeyFromPem(publicKeyPem);
+        var publicKeyPemReceiver = $(`.contactPublicKey[data-username="${receiver}"]`).val();
+        var publicKeyReceiver = forge.pki.publicKeyFromPem(publicKeyPemReceiver);
+        var encryptedMessageForReceiver = forge.util.encode64(publicKeyReceiver.encrypt(forge.util.encodeUtf8(message), 'RSA-OAEP'));
 
-        var encryptedMessage = forge.util.encode64(publicKey.encrypt(forge.util.encodeUtf8(message), 'RSA-OAEP'));
+        var publicKeyPemSender = $('#userPublicKey').val();
+        var publicKeySender = forge.pki.publicKeyFromPem(publicKeyPemSender);
+        var encryptedMessageForSender = forge.util.encode64(publicKeySender.encrypt(forge.util.encodeUtf8(message), 'RSA-OAEP'));
+
         socket.emit('send_message', {
             'sender': sender,
-            'message': encryptedMessage,
+            'message_receiver': encryptedMessageForReceiver,
+            'message_sender': encryptedMessageForSender,
             'receiver': receiver,
             'room': [sender, receiver].sort().join('_')
         });
 
-        // Optimistically append the sent message to the chat log with 'sent' type
         appendMessage(sender, message, 'sent');
         $('#messageInput').val('');
     });
@@ -49,7 +57,7 @@ $(document).ready(function () {
         try {
             var encryptedMessageBytes = forge.util.decode64(data.message);
             var decryptedMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessageBytes, 'RSA-OAEP'));
-            // Append the received message to the chat log with 'received' type
+
             appendMessage(data.sender, decryptedMessage, 'received');
         } catch (error) {
             console.error('Decryption error:', error);
@@ -59,19 +67,22 @@ $(document).ready(function () {
     socket.on('chat_history', function (data) {
         console.log(data);
         data.history.forEach(function (historyItem) {
-            // Check if the message was sent by the current user
-            if (historyItem.sender === sender) {
-                // Directly append sent messages without decryption
-                appendMessage(historyItem.sender, historyItem.message, 'sent'); // Assuming 'message' holds the original text
-            } else {
-                // Attempt to decrypt received messages
-                try {
-                    var encryptedMessageBytes = forge.util.decode64(historyItem.message);
-                    var decryptedMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessageBytes, 'RSA-OAEP'));
+            try {
+                var encryptedMessageBytes;
+                var decryptedMessage;
+
+                if (historyItem.sender === sender) {
+                    encryptedMessageBytes = forge.util.decode64(historyItem.message_sender);
+                    decryptedMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessageBytes, 'RSA-OAEP'));
+                    appendMessage(historyItem.sender, decryptedMessage, 'sent');
+                } else {
+
+                    encryptedMessageBytes = forge.util.decode64(historyItem.message_receiver);
+                    decryptedMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessageBytes, 'RSA-OAEP'));
                     appendMessage(historyItem.sender, decryptedMessage, 'received');
-                } catch (error) {
-                    console.error('Decryption error in chat history for received message:', error);
                 }
+            } catch (error) {
+                console.error('Decryption error in chat history:', error);
             }
         });
     });

@@ -2,7 +2,7 @@ import os
 import boto3
 from boto3.dynamodb.conditions import Key
 from datetime import datetime
-# Initialize DynamoDB resource
+
 dynamodb = boto3.resource('dynamodb',
                           aws_access_key_id=os.environ.get("AWS_ACCESS_ID"),
                           aws_secret_access_key=os.environ.get("AWS_ACCESS_KEY"),
@@ -15,20 +15,20 @@ def create_chat_session_id(sender, receiver):
     return '_'.join(sorted([sender, receiver]))
 
 
-def sendMessage(room, sender, message):
+def sendMessage(room, sender, message_receiver, message_sender):
     timestamp = datetime.now().isoformat()
     chatRoom_table.put_item(Item={
-        'chatSessionId': room,  # Use chatSessionId as the primary key
-        'timestamp': timestamp,  # Sort key
+        'chatSessionId': room,
+        'timestamp': timestamp,
         'sender': sender,
-        'message': message
+        'message_receiver': message_receiver,
+        'message_sender': message_sender
     })
-
 
 
 def receiveMessages(chatSessionId):
     response = chatRoom_table.query(
         KeyConditionExpression=Key('chatSessionId').eq(chatSessionId),
-        ScanIndexForward=True  # Ensure messages are returned in ascending order by timestamp
+        ScanIndexForward=True
     )
     return response['Items']

@@ -10,7 +10,7 @@
 
 <body>
 <header>
-    <h1>Welcome back {{ user['username'] }}</h1> <!-- Updated to access dictionary value -->
+    <h1>Welcome back {{ user['username'] }}</h1>
     <button onclick="location.href='{{ url_for('website.home') }}';" style="cursor:pointer;" class="logout-button">
         Logout
     </button>
@@ -21,21 +21,18 @@
     </div>
 </header>
 <div class="container">
-    <input id="sender" hidden value="{{ user['username'] }}"> <!-- Updated to access dictionary value -->
-
-    <!-- Dynamically inserted user's private key from the server -->
-    <!-- Dynamically inserted user's private key from the server -->
+    <input id="sender" hidden value="{{ user['username'] }}">
     <input id="userPrivateKey" type="hidden"
            value="{{ private_key }}">
+    <input id="userPublicKey" type="hidden"
+           value="{{ public_key }}">
 
     <div class="sidebar">
         <div class="user-list">
             {% for friend_username, public_key in contacts_public_keys.items() %}
-                <!-- Updated loop to iterate over contacts_public_keys -->
                 <div class="user" data-username="{{ friend_username }}">
                     {{ friend_username }}
                     <button class="delete-button">Delete</button>
-                    <!-- Dynamically inserted friend's public key from the server -->
                     <input type="hidden" class="contactPublicKey" data-username="{{ friend_username }}"
                            value="{{ public_key }}">
                 </div>

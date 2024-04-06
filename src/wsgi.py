@@ -9,25 +9,20 @@ from blueprints.website import website
 from processing import filters
 from database.chatRooms import sendMessage, receiveMessages
 
-
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
-# Register blueprints
 app.register_blueprint(website)
 app.register_blueprint(api, url_prefix='/api')
 app.register_blueprint(error_handlers)
 
-# Middleware
 app.before_request(middleware.before_request)
 app.after_request(middleware.apply_content_version)
 
-# Initialize Flask-SocketIO
 socketio = SocketIO(app)
 
 
-# WebSocket event handlers
 @socketio.on('connect')
 def handle_connect():
     print('User connected')
@@ -47,7 +42,6 @@ def on_join(data):
     socketio.emit('chat_history', {'history': chat_history}, room=room)
 
 
-
 @socketio.on('leave_conversation')
 def on_leave(data):
     try:
@@ -63,20 +57,15 @@ def handle_send_message(data):
     try:
         room = data['room']
         sender = data.get('sender')
-        message = data.get('message')
+        message_receiver = data.get('message_receiver')
+        message_sender = data.get('message_sender')
 
-        # Store the message in DynamoDB
-        sendMessage(room, sender, message)  # Assuming room acts as the receiver or unique identifier for the chat session
+        sendMessage(room, sender, message_receiver, message_sender)
 
-        # Debugging log
-        print(f'Sending message from {sender} to room {room}: {message}')
-
-        # Emit the message to other clients in the room
-        socketio.emit('receive_message', {'sender': sender, 'message': message}, room=room)
+        socketio.emit('receive_message', {'sender': sender, 'message': message_receiver}, room=room)
     except Exception as e:
         print(f'Error sending message: {str(e)}')
 
 
-# Serve the app
 if __name__ == '__main__':
     socketio.run(app)

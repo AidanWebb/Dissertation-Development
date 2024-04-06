@@ -10,7 +10,6 @@ from classes.status import Status
 from processing.crypto import rsa_keypair
 import logging
 
-# At the beginning of your file
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 dynamodb = boto3.resource('dynamodb',
@@ -22,7 +21,7 @@ user_table = dynamodb.Table('user')
 
 
 def add_user(username, password):
-    # Generate RSA key pair and retrieve serialized keys
+
     private_key_serialized, public_key_serialized = rsa_keypair()
 
     user_info = {
@@ -55,23 +54,18 @@ def get_user(username):
 
 
 def add_friend(username, friend_username):
-    # Fetch both user and friend from the database
     user = get_user(username)
     friend = get_user(friend_username)
 
-    # Check if friend already in user's friend list
+
     if friend_username not in user['friends']:
-        # Add friend to user's friend list
         user['friends'].append(friend_username)
-        # Update the user in the database
         encode(user)
         user_table.put_item(Item=user)
 
-    # Check if user already in friend's friend list
     if username not in friend['friends']:
         # Add user to friend's friend list
         friend['friends'].append(username)
-        # Update the friend in the database
         encode(friend)
         user_table.put_item(Item=friend)
 
@@ -92,7 +86,7 @@ def fetch_public_key(username):
             return public_key
         else:
             logging.warning(f"No public key found for {username}")
-            return None  # Return None if no user or public key is found
+            return None
     except Exception as e:
         logging.error(f"Error fetching public key for {username}: {e}", exc_info=True)
         return None
@@ -114,7 +108,7 @@ def fetch_private_key(username):
             return private_key
         else:
             logging.warning(f"No private key found for {username}")
-            return None  # Return None if no user or public key is found
+            return None
     except Exception as e:
         logging.error(f"Error fetching private key for {username}: {e}", exc_info=True)
         return None
