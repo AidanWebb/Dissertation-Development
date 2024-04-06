@@ -10,7 +10,6 @@ body {
     animation: subtleMovement 100s infinite linear;
 }
 
-/* Add Google Fonts link in your HTML file for 'Roboto' */
 
 
 header {
@@ -155,10 +154,28 @@ input:focus {
 
 footer {
     text-align: center;
-    padding: 2em;
+    padding: 2.5em;
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     bottom: 0;
     width: 100%;
     color: #fff;
+}
+
+@media (max-width: 768px) {
+    header h1{
+        font-size: 2em;
+    }
+    form button,
+    .back-button {
+        font-size: 1.5em;
+        padding: 10px 25px;
+    }
+
+    input {
+        font-size: 1.2em;
+    }
+    footer{
+        padding: 1em;
+    }
 }

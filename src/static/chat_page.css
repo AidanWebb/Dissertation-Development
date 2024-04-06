@@ -52,14 +52,14 @@ header h1 {
     transition: background-color 0.3s, color 0.3s;
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.6);
-    color: #fff; /* White text color */
+    color: #fff;
     font-weight: bold;
-    text-align: center; /* Center text alignment */
-    font-size: 1.1em; /* Font size */
+    text-align: center;
+    font-size: 1.1em;
 }
 
 .user:hover {
-    background: linear-gradient(to right, #0044cc, #66ccff); /* Darker background color on hover */
+    background: linear-gradient(to right, #0044cc, #66ccff);
 }
 
 
@@ -71,11 +71,11 @@ header h1 {
 
 .chat-header {
     background: rgba(0, 0, 0, 0.6);
-    color: white; /* White text color */
-    padding: 10px 20px; /* Padding around the text */
-    border-radius: 5px; /* Rounded corners */
-    text-align: left; /* Center alignment */
-    font-size: 1.5em; /* Larger font size */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 1.5em;
     font-weight: lighter;
     text-transform: full-size-kana;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -191,21 +191,21 @@ Button:hover {
 
 .delete-button {
     cursor: pointer;
-    padding: 8px 15px; /* Adjust padding to make the button smaller */
+    padding: 8px 15px; 
     background: rgba(0, 0, 0, 0.6);
-    color: #fff; /* White text color */
+    color: #fff;
     border: none;
-    border-radius: 15px; /* Rounded border */
-    font-size: 1em; /* Font size */
+    border-radius: 15px;
+    font-size: 1em;
     transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 5px; /* Adjust margin */
+    margin-top: 5px;
     position: relative;
 }
 
 .delete-button:hover {
-    transform: scale(1.05); /* Slightly increase size on hover */
-    background: linear-gradient(to right, #990000, #cc3333); /* Darker red gradient background on hover */
+    transform: scale(1.05);
+    background: linear-gradient(to right, #990000, #cc3333);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -246,4 +246,60 @@ Button:hover {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+        margin-bottom: 0.3em;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar,
+    .main-chat {
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar {
+        order: 2;
+    }
+
+    .main-chat {
+        order: 1;
+    }
+
+    .user-list {
+        max-height: 50vh;
+    }
+
+    .chat-header {
+        font-size: 1.2em;
+    }
+
+    .chat-box textarea {
+        font-size: 1em;
+    }
+
+    Button,
+    .logout-button,
+    .send-button,
+    .delete-button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    Button:hover,
+    .logout-button:hover,
+    .send-button:hover,
+    .delete-button:hover {
+        transform: scale(1);
+    }
+
+    .message {
+        max-width: 90%;
+    }
 }

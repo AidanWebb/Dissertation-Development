@@ -23,7 +23,7 @@ header h1 {
     color: #fff;
 }
 
-form{
+form {
     margin-top: 3em;
     display: flex;
     flex-direction: column;
@@ -51,7 +51,8 @@ form button:hover {
     background: linear-gradient(to right, #00b300, #009900);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
-.back-button{
+
+.back-button {
     top: 20px;
     left: 20px;
     text-align: center;
@@ -68,12 +69,14 @@ form button:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-decoration: none;
 }
-.back-button:hover{
+
+.back-button:hover {
     transform: scale(1.1);
-    background: linear-gradient(to right,#009900, #00cc00);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+    background: linear-gradient(to right, #009900, #00cc00);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
-label{
+
+label {
     font-size: 1.6em;
     color: #ffffff;
     margin-bottom: 0.5em;
@@ -88,22 +91,37 @@ input {
     font-size: 1.4em;
     outline: none;
     transition: border-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     color: #333333;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 input:focus {
     border-color: #FF8C00;
     transform: scale(1.02);
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 footer {
     text-align: center;
-    padding: 2em;
+    padding: 2.5em;
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+@media (max-width: 768px) {
+    header h1{
+        font-size: 2em;
+    }
+    form button,
+    .back-button {
+        font-size: 1.5em;
+        padding: 10px 25px;
+    }
+
+    input {
+        font-size: 1.2em;
+    }
 }

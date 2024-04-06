@@ -54,7 +54,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    height: 50vh;
     overflow-y: auto; /* or overflow: scroll; */
 }
 
@@ -75,11 +75,40 @@ section:hover {
 
 footer {
     text-align: center;
-    padding: 2em;
-    background: rgba(0, 0, 0, 0.6);
+    padding: 0.5em;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 footer p{
     font-size: 1.2em;
     color: #ccc;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    header p,
+    footer p {
+        font-size: 1em;
+    }
+
+    section h2 {
+        font-size: 1.5em;
+        padding: 15px 30px;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    section {
+        width: auto;
+        padding: 25px;
+        margin: 10px;
+    }
 }
 
