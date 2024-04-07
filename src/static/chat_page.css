@@ -191,7 +191,7 @@ Button:hover {
 
 .delete-button {
     cursor: pointer;
-    padding: 8px 15px; 
+    padding: 8px 15px;
     background: rgba(0, 0, 0, 0.6);
     color: #fff;
     border: none;

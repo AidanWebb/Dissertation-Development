@@ -1,24 +1,21 @@
 $(document).ready(function () {
-
-    // Submit the form when submit button is pressed
     $("#loginForm").submit(function (event) {
         event.preventDefault();
         submitForm();
     });
 
     function submitForm() {
-        // Disable the submit button to ensure groups are not duplicated
+
         let submitButton = $('#login');
         submitButton.attr('disabled', true);
         submitButton.html("Logging In...");
 
-        // Prepare the JSON that you want to send to the API here...
         let json = {
             "username": $("#username").val(),
             "password": $("#password").val()
         };
 
-        // Post the JSON
+
         $.ajax("/api/auth/login", {
             type: "POST",
             data: JSON.stringify(json),
@@ -37,13 +34,13 @@ $(document).ready(function () {
         });
     }
 
-    // Shows error alert
+
     function raise_failure() {
         // Maybe show a log message here...
         reset_submit_button();
     }
 
-    // Re-enables the form submission button
+
     function reset_submit_button() {
         let submit_button = $('#login');
         submit_button.attr('disabled', false);

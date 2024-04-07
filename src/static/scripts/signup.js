@@ -33,9 +33,9 @@ $(document).ready(function () {
         });
     }
 
-    // Shows error alert
+
     function raise_failure() {
-        // Maybe show a log message here...
+
         reset_submit_button();
     }
 

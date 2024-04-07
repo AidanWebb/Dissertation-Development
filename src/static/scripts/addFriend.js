@@ -8,7 +8,7 @@ $(document).ready(function () {
         let username = $("#userInput").val().trim();
         let json = {"username": username};
 
-        console.log(`Adding friend: ${username}`); // Log adding friend attempt
+        console.log(`Adding friend: ${username}`);
         $.ajax("/api/add-friend", {
             type: "POST",
             data: JSON.stringify(json),
@@ -16,33 +16,33 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (data.status === 'success') {
-                    console.log(`${username} added successfully. Public key:`, data.public_key); // Log successful friend addition and public key
+                    console.log(`${username} added successfully. Public key:`, data.public_key);
 
-                    // Store the public key in local storage
+
                     localStorage.setItem(`publicKey_${username}`, data.public_key);
-                    console.log(`Public key for ${username} stored successfully.`); // Log successful storage
+                    console.log(`Public key for ${username} stored successfully.`);
 
-                    // Dynamically update the sidebar with the new friend
+
                     $(".user-list").append(`<div class="user" data-username="${username}">${username}<button class="delete-button">Delete</button></div>`);
-                    console.log(`Sidebar updated with new friend: ${username}.`); // Log sidebar update
+                    console.log(`Sidebar updated with new friend: ${username}.`);
 
                 } else {
-                    console.error(`Failed to add ${username} as a friend. Response:`, data); // Log failure to add friend with response data
+                    console.error(`Failed to add ${username} as a friend. Response:`, data);
                 }
             },
             error: function (xhr, status, error) {
-                console.error(`Error occurred when trying to add ${username} as a friend.`, error); // Log error on friend addition
+                console.error(`Error occurred when trying to add ${username} as a friend.`, error);
             }
         });
     }
 
 
-    // Bind click event to add button
+
     $("#addButton").click(function () {
         toggleSearchBar();
     });
 
-    // Bind click event to search button
+
     $("#userAddButton").click(function () {
         addFriend();
     });
