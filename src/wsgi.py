@@ -6,10 +6,9 @@ import processing.middleware as middleware
 from blueprints.api import api
 from blueprints.error_handlers import error_handlers
 from blueprints.website import website
-from processing import filters
 from database.chatRooms import sendMessage, receiveMessages
 
-# Initialize Flask app
+
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 

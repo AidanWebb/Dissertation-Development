@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Function to toggle search bar
     function toggleSearchBar() {
         $("#friendBar").toggle();
     }

@@ -89,10 +89,8 @@ def delete_friend(username, friend):
         raise OKException(Status.USER_NOT_FOUND)
 
 
+
 def fetch_public_key(username):
-    """
-    Fetches the public key for a given username from the DynamoDB table.
-    """
     try:
         logging.info(f"Attempting to fetch public key for username: {username}")
         response = user_table.query(
@@ -110,11 +108,7 @@ def fetch_public_key(username):
         logging.error(f"Error fetching public key for {username}: {e}", exc_info=True)
         return None
 
-
 def fetch_private_key(username):
-    """
-    Fetches the public key for a given username from the DynamoDB table.
-    """
     try:
         logging.info(f"Attempting to fetch private key for username: {username}")
         response = user_table.query(
