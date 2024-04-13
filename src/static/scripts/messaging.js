@@ -2,7 +2,7 @@ $(document).ready(function () {
     var chatLogs = $('#chatLogs');
     var sender = $('#sender').val();
     var receiver = null;
-    var privateKeyPem = $('#userPrivateKey').val();//Fetching the private key from the chat page 
+    var privateKeyPem = $('#userPrivateKey').val();//Fetching the private key from the chat page
     var privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
